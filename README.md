@@ -1,3 +1,3 @@
-# Project Title Goes Here
+# Multidimensional Course!
 
 Info about your project goes here

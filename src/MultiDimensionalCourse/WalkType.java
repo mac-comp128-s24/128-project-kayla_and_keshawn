@@ -18,10 +18,16 @@ public class WalkType {
     public void twoDimensions() {
         canvas.onKeyDown((event) -> {
             if (event.getKey() == Key.RIGHT_ARROW) {
-                elephant.moveBy(10, 0);
+                elephant.moveBy(5, 0);
             }
-            else if (event.getKey() == Key.LEFT_ARROW) {
-                elephant.moveBy(-10, 0);
+            if (event.getKey() == Key.LEFT_ARROW) {
+                elephant.moveBy(-5, 0);
+            }
+            if (elephant.getPosition().getX() < 0) {
+                elephant.setPosition(0, elephant.getPosition().getY());
+            }
+            if (elephant.getPosition().getX() + elephant.getWidth() > canvas.getWidth()) {
+                elephant.setPosition(canvas.getWidth() - elephant.getWidth(), elephant.getPosition().getY());
             }
         });
     }
@@ -29,18 +35,16 @@ public class WalkType {
     public void threeDimensions() {
         canvas.onKeyDown((event) -> {
             if (event.getKey() == Key.RIGHT_ARROW) {
-                elephant.moveBy(10, 0);
-                System.out.println("Key pressed!");
+                elephant.moveBy(5, 0);
             }
-            else if (event.getKey() == Key.LEFT_ARROW) {
-                elephant.moveBy(-10, 0);
-                System.out.println("Key pressed!");
+            if (event.getKey() == Key.LEFT_ARROW) {
+                elephant.moveBy(-5, 0);
             }
-            else if (event.getKey() == Key.UP_ARROW) {
-                elephant.moveBy(0, -10);
+            if (event.getKey() == Key.UP_ARROW) {
+                elephant.moveBy(0, -5);
             }
-            else if (event.getKey() == Key.DOWN_ARROW) {
-                elephant.moveBy(0, 10);
+            if (event.getKey() == Key.DOWN_ARROW) {
+                elephant.moveBy(0, 5);
             }
         });
     }
@@ -53,12 +57,12 @@ public class WalkType {
             threeDimensions();
         }
         canvas.onKeyDown((event) -> {
-            if (event.getKey() == Key.NUM_2) {
+            if (event.getKey() == Key.NUM_2 && walkDimension == 3) {
                 walkDimension = 2;
                 twoDimensions();
                 System.out.println("Dimension should be 2: walkDimension " + walkDimension);
             }
-            else if (event.getKey() == Key.NUM_3) {
+            if (event.getKey() == Key.NUM_3 && walkDimension == 2) {
                 walkDimension = 3;
                 threeDimensions();
                 System.out.println("Dimension should be 3: walkDimension " + walkDimension);

@@ -5,13 +5,14 @@ import edu.macalester.graphics.events.Key;
 
 public class WalkType {
     
-    private int walkDimension = 2;
+    private int walkDimension;
     private CanvasWindow canvas;
     private ElephantDude elephant;
 
     public WalkType(CanvasWindow canvas, ElephantDude elephant) {
         this.canvas = canvas;
         this.elephant = elephant;
+        walkDimension = 2;
     }
 
     public void twoDimensions() {
@@ -19,7 +20,7 @@ public class WalkType {
             if (event.getKey() == Key.RIGHT_ARROW) {
                 elephant.moveBy(10, 0);
             }
-            if (event.getKey() == Key.LEFT_ARROW) {
+            else if (event.getKey() == Key.LEFT_ARROW) {
                 elephant.moveBy(-10, 0);
             }
         });
@@ -31,14 +32,14 @@ public class WalkType {
                 elephant.moveBy(10, 0);
                 System.out.println("Key pressed!");
             }
-            if (event.getKey() == Key.LEFT_ARROW) {
+            else if (event.getKey() == Key.LEFT_ARROW) {
                 elephant.moveBy(-10, 0);
                 System.out.println("Key pressed!");
             }
-            if (event.getKey() == Key.UP_ARROW) {
+            else if (event.getKey() == Key.UP_ARROW) {
                 elephant.moveBy(0, -10);
             }
-            if (event.getKey() == Key.DOWN_ARROW) {
+            else if (event.getKey() == Key.DOWN_ARROW) {
                 elephant.moveBy(0, 10);
             }
         });
@@ -47,19 +48,29 @@ public class WalkType {
     public void walk() {
         if (walkDimension == 2) {
             twoDimensions();
-            canvas.onKeyDown((event) -> {
-                if (event.getKey() == Key.NUM_3) {
-                    walkDimension = 3;
-                }
-            });
         }
-        if (walkDimension == 3) {
+        else if (walkDimension == 3) {
             threeDimensions();
-            canvas.onKeyDown((event) -> {
-                if (event.getKey() == Key.NUM_2) {
-                    walkDimension = 2;
-                }
-            });
         }
+        canvas.onKeyDown((event) -> {
+            if (event.getKey() == Key.NUM_2) {
+                walkDimension = 2;
+                twoDimensions();
+                System.out.println("Dimension should be 2: walkDimension " + walkDimension);
+            }
+            else if (event.getKey() == Key.NUM_3) {
+                walkDimension = 3;
+                threeDimensions();
+                System.out.println("Dimension should be 3: walkDimension " + walkDimension);
+            }
+        });
+    }
+
+    public void setWalkDimension(int dimension) {
+        walkDimension = dimension;
+    }
+
+    public int getWalkDimension() {
+        return walkDimension;
     }
 }

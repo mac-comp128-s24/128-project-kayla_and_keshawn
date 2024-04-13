@@ -1,5 +1,7 @@
 package MultiDimensionalCourse;
 
+import java.util.Deque;
+import java.util.ArrayDeque;
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.events.Key;
 
@@ -7,17 +9,32 @@ public class DimensionalCourse {
     
     private CanvasWindow canvas;
     private ElephantDude elephant;
-    private WalkType walkType;
+    private Deque<WalkType> walkStack;
+
 
     public DimensionalCourse() {
         canvas = new CanvasWindow("Multi-Dimensional Course", 600, 400);
         elephant = new ElephantDude(canvas);
         canvas.add(elephant);
-        walkType = new WalkType(canvas, elephant);
+        walkStack = new ArrayDeque<WalkType>();
+        WalkType walkType = new WalkType(canvas, elephant, 2);
+        walkStack.push(walkType);
     }
 
     public void run() {
-        elephant.move();
+        elephant.move(walkStack.peek());
+        canvas.onKeyDown((event) -> {
+            if (event.getKey() == Key.SPACE) {
+                if (walkStack.peek().getWalkDimension() == 2) {
+                    WalkType walkType = new WalkType(canvas, elephant, 3);
+                    walkStack.push(walkType);
+                }
+                else {
+                    WalkType walkType = new WalkType(canvas, elephant, 2);
+                    walkStack.push(walkType);
+                }
+            }
+        });
     }
 
     public static void main(String[] args) {

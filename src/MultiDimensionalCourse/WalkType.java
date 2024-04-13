@@ -9,10 +9,10 @@ public class WalkType {
     private CanvasWindow canvas;
     private ElephantDude elephant;
 
-    public WalkType(CanvasWindow canvas, ElephantDude elephant) {
+    public WalkType(CanvasWindow canvas, ElephantDude elephant, int walkDimension) {
         this.canvas = canvas;
         this.elephant = elephant;
-        walkDimension = 2;
+        this.walkDimension = walkDimension;
     }
 
     public void twoDimensions() {
@@ -56,22 +56,6 @@ public class WalkType {
         else if (walkDimension == 3) {
             threeDimensions();
         }
-        canvas.onKeyDown((event) -> {
-            if (event.getKey() == Key.NUM_2 && walkDimension == 3) {
-                walkDimension = 2;
-                twoDimensions();
-                System.out.println("Dimension should be 2: walkDimension " + walkDimension);
-            }
-            if (event.getKey() == Key.NUM_3 && walkDimension == 2) {
-                walkDimension = 3;
-                threeDimensions();
-                System.out.println("Dimension should be 3: walkDimension " + walkDimension);
-            }
-        });
-    }
-
-    public void setWalkDimension(int dimension) {
-        walkDimension = dimension;
     }
 
     public int getWalkDimension() {

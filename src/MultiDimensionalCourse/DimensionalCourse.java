@@ -3,7 +3,7 @@ package MultiDimensionalCourse;
 import java.util.Deque;
 import java.util.ArrayDeque;
 import edu.macalester.graphics.CanvasWindow;
-import edu.macalester.graphics.GraphicsGroup;
+import edu.macalester.graphics.GraphicsObject;
 import edu.macalester.graphics.events.Key;
 import java.util.Map;
 
@@ -19,7 +19,7 @@ public class DimensionalCourse {
         canvas = new CanvasWindow("Multi-Dimensional Course", 600, 400);
         elephant = new ElephantDude(canvas);
         obstacles = new Obstacle(canvas);
-        for(GraphicsGroup object : obstacles.getObstacles().keySet()){
+        for(GraphicsObject object : obstacles.getObstacles().keySet()){
             canvas.add(object);
         }
         canvas.add(elephant);

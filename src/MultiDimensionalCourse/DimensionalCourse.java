@@ -3,22 +3,30 @@ package MultiDimensionalCourse;
 import java.util.Deque;
 import java.util.ArrayDeque;
 import edu.macalester.graphics.CanvasWindow;
+import edu.macalester.graphics.GraphicsGroup;
 import edu.macalester.graphics.events.Key;
+import java.util.Map;
 
 public class DimensionalCourse {
     
     private CanvasWindow canvas;
     private ElephantDude elephant;
     private Deque<WalkType> walkStack;
+    private Obstacle obstacles;
 
 
     public DimensionalCourse() {
         canvas = new CanvasWindow("Multi-Dimensional Course", 600, 400);
         elephant = new ElephantDude(canvas);
+        obstacles = new Obstacle(canvas);
+        for(GraphicsGroup object : obstacles.getObstacles().keySet()){
+            canvas.add(object);
+        }
         canvas.add(elephant);
         walkStack = new ArrayDeque<WalkType>();
         WalkType walkType = new WalkType(canvas, elephant, 2);
         walkStack.push(walkType);
+
     }
 
     public void run() {

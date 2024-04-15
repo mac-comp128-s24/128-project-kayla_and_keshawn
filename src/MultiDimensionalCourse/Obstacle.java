@@ -13,9 +13,11 @@ import edu.macalester.graphics.Point;
 public class Obstacle {
     private Map<GraphicsObject, Point> obstacles;
     
-    public Obstacle(CanvasWindow canvas){
+    public Obstacle(CanvasWindow canvas, boolean Spikes, boolean Walls, boolean Predators){
         obstacles = new HashMap<>();
-        showSpike();
+        if (Spikes == true) {
+            showSpike();
+        }
     }
     public Map<GraphicsObject, Point> getObstacles(){
         return obstacles;
@@ -23,7 +25,6 @@ public class Obstacle {
     
     public void showSpike(){
         Path triangle = Path.makeTriangle(5, 10, 10, 50, 25, 0);
-        triangle.setStrokeWidth(6);
         obstacles.put(triangle, triangle.getPosition());
     }
 }

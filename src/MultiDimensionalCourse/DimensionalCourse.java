@@ -5,20 +5,19 @@ import java.util.ArrayDeque;
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.GraphicsObject;
 import edu.macalester.graphics.events.Key;
-import java.util.Map;
 
 public class DimensionalCourse {
     
     private CanvasWindow canvas;
-    private ElephantDude elephant;
+    private PenguinDude elephant;
     private Deque<WalkType> walkStack;
     private Obstacle obstacles;
 
 
     public DimensionalCourse() {
-        canvas = new CanvasWindow("Multi-Dimensional Course", 600, 400);
-        elephant = new ElephantDude(canvas);
-        obstacles = new Obstacle(canvas);
+        canvas = new CanvasWindow("The Multi-Dimensional Penguin", 1200, 600);
+        elephant = new PenguinDude(canvas);
+        obstacles = new Obstacle(canvas, true, false, false);
         for(GraphicsObject object : obstacles.getObstacles().keySet()){
             canvas.add(object);
         }

@@ -7,9 +7,9 @@ public class WalkType {
     
     private int walkDimension;
     private CanvasWindow canvas;
-    private ElephantDude elephant;
+    private PenguinDude elephant;
 
-    public WalkType(CanvasWindow canvas, ElephantDude elephant, int walkDimension) {
+    public WalkType(CanvasWindow canvas, PenguinDude elephant, int walkDimension) {
         this.canvas = canvas;
         this.elephant = elephant;
         this.walkDimension = walkDimension;

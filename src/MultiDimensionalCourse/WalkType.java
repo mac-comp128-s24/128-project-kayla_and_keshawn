@@ -7,27 +7,32 @@ public class WalkType {
     
     private int walkDimension;
     private CanvasWindow canvas;
-    private PenguinDude elephant;
+    private PenguinDude penguin;
+    private Damage penguinDamage;
 
-    public WalkType(CanvasWindow canvas, PenguinDude elephant, int walkDimension) {
+    public WalkType(CanvasWindow canvas, PenguinDude penguin, int walkDimension) {
         this.canvas = canvas;
-        this.elephant = elephant;
+        this.penguin = penguin;
         this.walkDimension = walkDimension;
+        penguinDamage = new Damage(penguin);
     }
 
     public void twoDimensions() {
         canvas.onKeyDown((event) -> {
             if (event.getKey() == Key.RIGHT_ARROW) {
-                elephant.moveBy(5, 0);
+                penguin.moveBy(5, 0);
             }
             if (event.getKey() == Key.LEFT_ARROW) {
-                elephant.moveBy(-5, 0);
+                penguin.moveBy(-5, 0);
             }
-            if (elephant.getPosition().getX() < 0) {
-                elephant.setPosition(0, elephant.getPosition().getY());
+            if (penguin.getPosition().getX() < 0) {
+                penguin.setPosition(0, penguin.getPosition().getY());
             }
-            if (elephant.getPosition().getX() + elephant.getWidth() > canvas.getWidth()) {
-                elephant.setPosition(canvas.getWidth() - elephant.getWidth(), elephant.getPosition().getY());
+            if (penguin.getPosition().getX() + penguin.getWidth() > canvas.getWidth()) {
+                penguin.setPosition(canvas.getWidth() - penguin.getWidth(), penguin.getPosition().getY());
+            }
+            if (penguinDamage.takesDamage(canvas)) {
+                canvas.remove(penguin);
             }
         });
     }
@@ -35,16 +40,16 @@ public class WalkType {
     public void threeDimensions() {
         canvas.onKeyDown((event) -> {
             if (event.getKey() == Key.RIGHT_ARROW) {
-                elephant.moveBy(5, 0);
+                penguin.moveBy(5, 0);
             }
             if (event.getKey() == Key.LEFT_ARROW) {
-                elephant.moveBy(-5, 0);
+                penguin.moveBy(-5, 0);
             }
             if (event.getKey() == Key.UP_ARROW) {
-                elephant.moveBy(0, -5);
+                penguin.moveBy(0, -5);
             }
             if (event.getKey() == Key.DOWN_ARROW) {
-                elephant.moveBy(0, 5);
+                penguin.moveBy(0, 5);
             }
         });
     }

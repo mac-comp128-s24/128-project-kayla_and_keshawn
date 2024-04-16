@@ -12,19 +12,14 @@ public class DimensionalCourse {
     private PenguinDude penguin;
     private Deque<WalkType> walkStack;
     private Obstacle obstacles;
-    private Damage damage;
-
 
     public DimensionalCourse() {
         canvas = new CanvasWindow("The Multi-Dimensional Penguin", 1200, 600);
         penguin = new PenguinDude(canvas);
-        obstacles = new Obstacle(canvas, true, false, false);
-        for(GraphicsObject object : obstacles.getObstacles().keySet()){
+        obstacles = new Obstacle(canvas, true, true, false);
+        for (GraphicsObject object : obstacles.getObstacles().keySet()) {
             canvas.add(object);
         }
-        // damage = new Damage();
-        // damage.takesDamage(penguin);
-
         canvas.add(penguin);
         walkStack = new ArrayDeque<WalkType>();
         WalkType walkType = new WalkType(canvas, penguin, 2);

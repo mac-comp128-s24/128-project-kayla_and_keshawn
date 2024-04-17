@@ -10,7 +10,7 @@ public class PenguinDude extends GraphicsGroup{
 
     public PenguinDude(CanvasWindow canvas) {
         this.canvas = canvas;
-        penguin =  new Image(0, canvas.getHeight() * 0.75, "otherpenguin.jpg");
+        penguin =  new Image(0, canvas.getHeight() * 0.75, "penguinDude.png");
         penguin.setMaxHeight(canvas.getHeight() * 0.15);
         penguin.setMaxWidth(canvas.getHeight() * 0.15);
         this.add(penguin);

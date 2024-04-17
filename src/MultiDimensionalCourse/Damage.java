@@ -10,8 +10,8 @@ public class Damage {
         this.penguin = penguin;
     }
     
-    public boolean takesDamage(CanvasWindow canvas){
-        GraphicsObject objectHit = canvas.getElementAt(penguin.getPosition().getX(), penguin.getPosition().getY() + penguin.getWidth());
+    public boolean takesDamage(CanvasWindow canvas) {
+        GraphicsObject objectHit = canvas.getElementAt(penguin.getPosition().getX() + penguin.getWidth(), penguin.getPosition().getY() + penguin.getHeight());
         if (objectHit != null) {
             System.out.println("been hit!!!");
             return true;

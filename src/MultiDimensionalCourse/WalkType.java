@@ -8,13 +8,13 @@ public class WalkType {
     private int walkDimension;
     private CanvasWindow canvas;
     private PenguinDude penguin;
-    private Damage penguinDamage;
+    private Damage damage;
 
     public WalkType(CanvasWindow canvas, PenguinDude penguin, int walkDimension) {
         this.canvas = canvas;
         this.penguin = penguin;
         this.walkDimension = walkDimension;
-        penguinDamage = new Damage(penguin);
+        damage = new Damage(penguin);
     }
 
     public void twoDimensions() {
@@ -30,9 +30,6 @@ public class WalkType {
             }
             if (penguin.getPosition().getX() + penguin.getWidth() > canvas.getWidth()) {
                 penguin.setPosition(canvas.getWidth() - penguin.getWidth(), penguin.getPosition().getY());
-            }
-            if (penguinDamage.takesDamage(canvas)) {
-                canvas.remove(penguin);
             }
         });
     }

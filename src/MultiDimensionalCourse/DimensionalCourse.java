@@ -9,19 +9,41 @@ import edu.macalester.graphics.events.Key;
 public class DimensionalCourse {
     
     private CanvasWindow canvas;
-    private PenguinDude penguin;
     private Maze maze;
+    PenguinDude penguin;
 
     public DimensionalCourse() {
         canvas = new CanvasWindow("The Multi-Dimensional Penguin", 600, 300);
-        penguin = new PenguinDude(canvas);
         maze = new Maze(canvas);
-        canvas.add(penguin);
+        penguin = maze.getPenguin();
     }
 
     public void run() {
-        penguin.move();
+        canvas.onKeyDown((event) -> {
+            if (event.getKey() == Key.RIGHT_ARROW) {
+                penguin.moveBy(5, 0);
+            }
+            if (event.getKey() == Key.LEFT_ARROW) {
+                penguin.moveBy(-5, 0);
+            }
+            if (event.getKey() == Key.UP_ARROW) {
+                penguin.moveBy(0, -5);
+            }
+            if (event.getKey() == Key.DOWN_ARROW) {
+                penguin.moveBy(0, 5);
+            }
+            if (takesDamage()) {
+                System.out.println("Been hit!!!");
+                canvas.remove(penguin);
+                PenguinDude revivedPenguin = new PenguinDude(canvas);
+                maze.setPenguin(revivedPenguin);
+                penguin = revivedPenguin;
+            }
+        });
+    }
 
+    public boolean takesDamage() {
+        return maze.penguinIsInHere();
     }
 
     public static void main(String[] args) {

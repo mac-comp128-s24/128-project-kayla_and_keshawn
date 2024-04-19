@@ -45,7 +45,7 @@ public class Maze {
         double penguinX = penguin.getPosition().getX();
         double penguinY = penguin.getPosition().getY();
         GraphicsObject block = canvas.getElementAt(penguinX - 1, penguinY - 1);
-        System.out.println(block);
+        // System.out.println(block);
         for (int i = 0; i < blocks.length; i++) {
             for (int j = 0; j < blocks[i].length; j++) {
                 if (block.equals(blocks[i][j])) {

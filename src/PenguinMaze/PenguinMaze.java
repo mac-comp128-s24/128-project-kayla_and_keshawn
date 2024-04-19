@@ -1,9 +1,6 @@
 package PenguinMaze;
 
-import java.util.Deque;
-import java.util.ArrayDeque;
 import edu.macalester.graphics.CanvasWindow;
-import edu.macalester.graphics.GraphicsObject;
 import edu.macalester.graphics.events.Key;
 
 public class PenguinMaze {
@@ -31,6 +28,18 @@ public class PenguinMaze {
             }
             if (event.getKey() == Key.DOWN_ARROW) {
                 penguin.moveBy(0, 5);
+            }
+            if (penguin.getPosition().getX() <= 0) {
+                penguin.setPosition(1, penguin.getPosition().getY());
+            }
+            if (penguin.getPosition().getY() <= 0) {
+                penguin.setPosition(penguin.getPosition().getX(), 1);
+            }
+            if (penguin.getPosition().getX() + penguin.getWidth() >= canvas.getWidth()) {
+                penguin.setPosition(canvas.getWidth() - penguin.getWidth(), penguin.getPosition().getY());
+            }
+            if (penguin.getPosition().getY() + penguin.getHeight() >= canvas.getHeight()) {
+                penguin.setPosition(penguin.getPosition().getX(), canvas.getHeight() - penguin.getHeight() - 1);
             }
             if (takesDamage()) {
                 System.out.println("Been hit!!!");

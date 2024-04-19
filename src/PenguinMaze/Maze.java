@@ -19,7 +19,7 @@ public class Maze {
             for (int j=0; j < blocks[i].length; j++) {
                 Block newBlock = new Block(i, j);
                 blocks[i][j] = newBlock;
-                newBlock.isFilled();
+                newBlock.setFillColor(Color.LIGHT_GRAY);
                 if (j != 4) {
                     newBlock.setFillColor(Color.BLACK);
                 }
@@ -29,7 +29,7 @@ public class Maze {
         penguin = new PenguinDude();
         pengCol = 1;
         pengRow = Math.floor(getStart().getPosition().getY() / 60);
-        canvas.add(penguin, pengCol, pengRow * 60);
+        canvas.add(penguin, pengCol + 15, (pengRow * 60) + 15);
     }
 
     public PenguinDude getPenguin() {
@@ -38,7 +38,7 @@ public class Maze {
 
     public void setPenguin(PenguinDude penguin) {
         this.penguin = penguin;
-        canvas.add(penguin, pengCol, pengRow * 60);
+        canvas.add(penguin, pengCol + 15, (pengRow * 60) + 15);
     }
 
     public boolean penguinIsInHere() {
@@ -52,7 +52,6 @@ public class Maze {
                     if (blocks[i][j].getFillColor() == Color.BLACK) {
                         return true;
                     }
-                    // blocks[i][j].setFillColor(Color.LIGHT_GRAY);
                     return false;
                 }
             }
@@ -62,8 +61,8 @@ public class Maze {
 
     public Block getStart() {
         for (int i = 0; i < blocks[i].length; i++) {
-            if (i == 0) {
-                return blocks[i][0];
+            if (blocks[0][i].getFillColor() != Color.BLACK) {
+                return blocks[0][i];
             }
         }
         return null;

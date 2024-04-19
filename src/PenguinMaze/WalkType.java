@@ -14,7 +14,6 @@ public class WalkType {
         this.canvas = canvas;
         this.penguin = penguin;
         this.walkDimension = walkDimension;
-        damage = new Damage();
     }
 
     public void twoDimensions() {

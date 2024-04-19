@@ -10,13 +10,11 @@ import edu.macalester.graphics.events.Key;
 
 public class PenguinDude extends GraphicsGroup{
     private Image penguin;
-    private CanvasWindow canvas;
 
-    public PenguinDude(CanvasWindow canvas) {
-        this.canvas = canvas;
+    public PenguinDude() {
         penguin =  new Image("penguinDude.png");
-        penguin.setMaxHeight(canvas.getHeight() * 0.15);
-        penguin.setMaxWidth(canvas.getHeight() * 0.15);
+        penguin.setMaxHeight(25);
+        penguin.setMaxWidth(25);
         this.add(penguin);
     }
 }

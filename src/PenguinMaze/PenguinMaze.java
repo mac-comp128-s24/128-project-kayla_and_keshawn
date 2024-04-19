@@ -35,7 +35,7 @@ public class PenguinMaze {
             if (takesDamage()) {
                 System.out.println("Been hit!!!");
                 canvas.remove(penguin);
-                PenguinDude revivedPenguin = new PenguinDude(canvas);
+                PenguinDude revivedPenguin = new PenguinDude();
                 maze.setPenguin(revivedPenguin);
                 penguin = revivedPenguin;
             }

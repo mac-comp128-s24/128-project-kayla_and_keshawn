@@ -26,8 +26,8 @@ public class Maze {
                 canvas.add(newBlock, i * 60, j * 60);
             }
         }
-        penguin = new PenguinDude(canvas);
-        pengCol = 0;
+        penguin = new PenguinDude();
+        pengCol = 1;
         pengRow = Math.floor(getStart().getPosition().getY() / 60);
         canvas.add(penguin, pengCol, pengRow * 60);
     }
@@ -38,7 +38,7 @@ public class Maze {
 
     public void setPenguin(PenguinDude penguin) {
         this.penguin = penguin;
-        canvas.add(penguin, 1, canvas.getHeight() * 0.8);
+        canvas.add(penguin, pengCol, pengRow * 60);
     }
 
     public boolean penguinIsInHere() {
@@ -61,9 +61,9 @@ public class Maze {
     }
 
     public Block getStart() {
-        for (int j = 0; j < blocks[0].length; j++) {
-            if (blocks[0][j].getFillColor() != Color.BLACK) {
-                return blocks[0][j];
+        for (int i = 0; i < blocks[i].length; i++) {
+            if (i == 0) {
+                return blocks[i][0];
             }
         }
         return null;

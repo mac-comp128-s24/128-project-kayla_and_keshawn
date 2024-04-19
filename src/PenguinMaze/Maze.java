@@ -6,6 +6,7 @@ import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.GraphicsObject;
 
 public class Maze {
+    private final int BLOCK_SIDELENGTH = 60;
     private Block[][] blocks;
     private PenguinDude penguin;
     private CanvasWindow canvas;
@@ -14,22 +15,23 @@ public class Maze {
     
     public Maze(CanvasWindow canvas){
         this.canvas = canvas;
+        penguin = new PenguinDude();
         blocks = new Block[10][5];
         for (int i=0; i < blocks.length; i++) {
             for (int j=0; j < blocks[i].length; j++) {
                 Block newBlock = new Block(i, j);
                 blocks[i][j] = newBlock;
                 newBlock.setFillColor(Color.LIGHT_GRAY);
-                if (j != 4) {
+                if (i != 0 && j < 3 && j != 1) {
                     newBlock.setFillColor(Color.BLACK);
                 }
-                canvas.add(newBlock, i * 60, j * 60);
+                newBlock.setStrokeColor(newBlock.getFillColor());
+                canvas.add(newBlock, i * BLOCK_SIDELENGTH, j * BLOCK_SIDELENGTH);
             }
         }
-        penguin = new PenguinDude();
         pengCol = 1;
-        pengRow = Math.floor(getStart().getPosition().getY() / 60);
-        canvas.add(penguin, pengCol + 15, (pengRow * 60) + 15);
+        pengRow = Math.floor(getStart().getPosition().getY() / BLOCK_SIDELENGTH); // Calculates y-coordinate of penguin when game gets configurated
+        canvas.add(penguin, pengCol + 15, (pengRow * BLOCK_SIDELENGTH) + 15);
     }
 
     public PenguinDude getPenguin() {
@@ -38,17 +40,19 @@ public class Maze {
 
     public void setPenguin(PenguinDude penguin) {
         this.penguin = penguin;
-        canvas.add(penguin, pengCol + 15, (pengRow * 60) + 15);
+        canvas.add(penguin, pengCol + 15, (pengRow * BLOCK_SIDELENGTH) + 15);
     }
 
-    public boolean penguinIsInHere() {
-        double penguinX = penguin.getPosition().getX();
-        double penguinY = penguin.getPosition().getY();
-        GraphicsObject block = canvas.getElementAt(penguinX - 1, penguinY - 1);
-        // System.out.println(block);
+    public boolean penguinHitWall() {
+        double penguinXLeft = penguin.getPosition().getX();
+        double penguinYTop = penguin.getPosition().getY();
+        double penguinXRight = penguin.getPosition().getX() + 30;
+        double penguinYBottom = penguin.getPosition().getY() + 30;
+        GraphicsObject blockAbove = canvas.getElementAt(penguinXLeft - 1, penguinYTop - 1);
+        GraphicsObject blockBelow = canvas.getElementAt(penguinXRight + 1, penguinYBottom + 1);
         for (int i = 0; i < blocks.length; i++) {
             for (int j = 0; j < blocks[i].length; j++) {
-                if (block.equals(blocks[i][j])) {
+                if (blockAbove.equals(blocks[i][j]) || blockBelow.equals(blocks[i][j])) {
                     if (blocks[i][j].getFillColor() == Color.BLACK) {
                         return true;
                     }

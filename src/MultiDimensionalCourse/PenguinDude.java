@@ -19,21 +19,4 @@ public class PenguinDude extends GraphicsGroup{
         penguin.setMaxWidth(canvas.getHeight() * 0.15);
         this.add(penguin);
     }
-
-    public void move() {
-        canvas.onKeyDown((event) -> {
-            if (event.getKey() == Key.RIGHT_ARROW) {
-                this.moveBy(5, 0);
-            }
-            else if (event.getKey() == Key.LEFT_ARROW) {
-                this.moveBy(-5, 0);
-            }
-            else if (event.getKey() == Key.UP_ARROW) {
-                this.moveBy(0, -5);
-            }
-            else if (event.getKey() == Key.DOWN_ARROW) {
-                this.moveBy(0, 5);
-            }
-        });
-    }
 }

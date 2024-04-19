@@ -10,7 +10,6 @@ public class DimensionalCourse {
     
     private CanvasWindow canvas;
     private PenguinDude penguin;
-    private Deque<WalkType> walkStack;
     private Maze maze;
 
     public DimensionalCourse() {
@@ -18,14 +17,10 @@ public class DimensionalCourse {
         penguin = new PenguinDude(canvas);
         maze = new Maze(canvas);
         canvas.add(penguin);
-        walkStack = new ArrayDeque<WalkType>();
-        WalkType walkType = new WalkType(canvas, penguin, 3);
-        walkStack.push(walkType);
-
     }
 
     public void run() {
-        penguin.move(walkStack.peek());
+        penguin.move();
 
     }
 

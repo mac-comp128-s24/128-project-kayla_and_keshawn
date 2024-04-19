@@ -16,9 +16,11 @@ public class Maze {
         blocks = new Block[10][5];
         for (int i=0; i < blocks.length; i++) {
             for (int j=0; j < blocks[i].length; j++) {
-                Block newBlock = new Block(i, j);
-                blocks[i][j] = newBlock;
-                canvas.add(newBlock, i * 60, j * 60);
+                if (j != 4) {
+                    Block newBlock = new Block(i, j);
+                    blocks[i][j] = newBlock;
+                    canvas.add(newBlock, i * 60, j * 60);
+                }
             }
         }
     }

@@ -1,4 +1,4 @@
-package MultiDimensionalCourse;
+package PenguinMaze;
 
 import java.awt.Color;
 
@@ -9,6 +9,8 @@ public class Maze {
     private Block[][] blocks;
     private PenguinDude penguin;
     private CanvasWindow canvas;
+    private double pengRow;
+    private double pengCol;
     
     public Maze(CanvasWindow canvas){
         this.canvas = canvas;
@@ -25,7 +27,9 @@ public class Maze {
             }
         }
         penguin = new PenguinDude(canvas);
-        canvas.add(penguin, 0, canvas.getHeight() * 0.8);
+        pengCol = 0;
+        pengRow = Math.floor(getStart().getPosition().getY() / 60);
+        canvas.add(penguin, pengCol, pengRow * 60);
     }
 
     public PenguinDude getPenguin() {
@@ -54,5 +58,14 @@ public class Maze {
             }
         }
         return false;
+    }
+
+    public Block getStart() {
+        for (int j = 0; j < blocks[0].length; j++) {
+            if (blocks[0][j].getFillColor() != Color.BLACK) {
+                return blocks[0][j];
+            }
+        }
+        return null;
     }
 }

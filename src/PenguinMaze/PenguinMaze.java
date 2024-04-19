@@ -1,4 +1,4 @@
-package MultiDimensionalCourse;
+package PenguinMaze;
 
 import java.util.Deque;
 import java.util.ArrayDeque;
@@ -6,13 +6,13 @@ import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.GraphicsObject;
 import edu.macalester.graphics.events.Key;
 
-public class DimensionalCourse {
+public class PenguinMaze {
     
     private CanvasWindow canvas;
     private Maze maze;
     PenguinDude penguin;
 
-    public DimensionalCourse() {
+    public PenguinMaze() {
         canvas = new CanvasWindow("The Multi-Dimensional Penguin", 600, 300);
         maze = new Maze(canvas);
         penguin = maze.getPenguin();
@@ -47,7 +47,7 @@ public class DimensionalCourse {
     }
 
     public static void main(String[] args) {
-        DimensionalCourse dimensionalCourse = new DimensionalCourse();
+        PenguinMaze dimensionalCourse = new PenguinMaze();
         dimensionalCourse.run();
     }
 }

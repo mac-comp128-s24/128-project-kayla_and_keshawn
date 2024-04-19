@@ -1,4 +1,4 @@
-package MultiDimensionalCourse;
+package PenguinMaze;
 
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.GraphicsObject;

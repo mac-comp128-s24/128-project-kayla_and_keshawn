@@ -56,7 +56,6 @@ public class Maze {
                     if (blocks[i][j].getFillColor() == Color.BLACK) {
                         return true;
                     }
-                    return false;
                 }
             }
         }
@@ -64,9 +63,18 @@ public class Maze {
     }
 
     public Block getStart() {
-        for (int i = 0; i < blocks[i].length; i++) {
-            if (blocks[0][i].getFillColor() != Color.BLACK) {
-                return blocks[0][i];
+        for (int j = 0; j < blocks[0].length; j++) {
+            if (blocks[0][j].getFillColor() != Color.BLACK) {
+                return blocks[0][j];
+            }
+        }
+        return null;
+    }
+
+    public Block getEnd() {
+        for (int j = 0; j < blocks[9].length; j++) {
+            if (blocks[9][j].getFillColor() != Color.BLACK) {
+                return blocks[9][j];
             }
         }
         return null;

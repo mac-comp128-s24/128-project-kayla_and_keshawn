@@ -5,6 +5,8 @@ import java.awt.Color;
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.GraphicsObject;
 import edu.macalester.graphics.GraphicsText;
+import java.util.Queue;
+import java.util.LinkedList;
 
 public class Maze {
     private final int BLOCK_SIDELENGTH = 60;
@@ -15,6 +17,7 @@ public class Maze {
     private double pengCol;
     private GraphicsText exit;
     public boolean isCompleted;
+    private Queue<Block> mazeQueue;
     
     public Maze(CanvasWindow canvas){
         isCompleted = false;
@@ -29,7 +32,9 @@ public class Maze {
                 newBlock.setFillColor(Color.LIGHT_GRAY);
                 if (j != 2 && i > 2) { // determines where the walls go
                     newBlock.setFillColor(Color.BLACK);
+                    
                 }
+                
                 newBlock.setStrokeColor(newBlock.getFillColor());
                 canvas.add(newBlock, i * BLOCK_SIDELENGTH, j * BLOCK_SIDELENGTH);
             }
@@ -90,4 +95,14 @@ public class Maze {
         }
         return null;
     }
+    //working on using a queue for a solution path
+    // public Queue<Block> solutionPath(){
+    //    mazeQueue= new LinkedList<Block>();
+    //     mazeQueue.offer(getStart());
+    //     while(!mazeQueue.isEmpty()){
+            
+    // public Block[][] getNeighbors(){
+
+    // }
+    // }
 }

@@ -4,6 +4,7 @@ import java.awt.Color;
 
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.GraphicsObject;
+import edu.macalester.graphics.GraphicsText;
 
 public class Maze {
     private final int BLOCK_SIDELENGTH = 60;
@@ -12,17 +13,21 @@ public class Maze {
     private CanvasWindow canvas;
     private double pengRow;
     private double pengCol;
+    private GraphicsText exit;
+    public boolean isCompleted;
     
     public Maze(CanvasWindow canvas){
+        isCompleted = false;
         this.canvas = canvas;
         penguin = new PenguinDude();
+        exit = new GraphicsText("EXIT!");
         blocks = new Block[10][5];
         for (int i=0; i < blocks.length; i++) {
             for (int j=0; j < blocks[i].length; j++) {
                 Block newBlock = new Block(i, j);
                 blocks[i][j] = newBlock;
                 newBlock.setFillColor(Color.LIGHT_GRAY);
-                if (i != 0 && j < 3 && j != 1) {
+                if (j != 2 && i > 2) { // determines where the walls go
                     newBlock.setFillColor(Color.BLACK);
                 }
                 newBlock.setStrokeColor(newBlock.getFillColor());
@@ -30,7 +35,8 @@ public class Maze {
             }
         }
         pengCol = 1;
-        pengRow = Math.floor(getStart().getPosition().getY() / BLOCK_SIDELENGTH); // Calculates y-coordinate of penguin when game gets configurated
+        pengRow = Math.floor(getStart().getPosition().getY() / BLOCK_SIDELENGTH); // Calculates y-coordinate of penguin when game gets configured
+        canvas.add(exit, getEnd().getPosition().getX(), getEnd().getPosition().getY() + 30);
         canvas.add(penguin, pengCol + 15, (pengRow * BLOCK_SIDELENGTH) + 15);
     }
 
@@ -56,6 +62,10 @@ public class Maze {
                     if (blocks[i][j].getFillColor() == Color.BLACK) {
                         return true;
                     }
+                    else if (blockAbove.equals(getEnd()) || blockBelow.equals(getEnd())) {
+                        isCompleted = true;
+                        return false;
+                    }
                 }
             }
         }
@@ -74,6 +84,7 @@ public class Maze {
     public Block getEnd() {
         for (int j = 0; j < blocks[9].length; j++) {
             if (blocks[9][j].getFillColor() != Color.BLACK) {
+                blocks[9][j].setStrokeColor(Color.BLACK);
                 return blocks[9][j];
             }
         }

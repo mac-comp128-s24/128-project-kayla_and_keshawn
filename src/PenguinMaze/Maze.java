@@ -95,14 +95,14 @@ public class Maze {
         }
         return null;
     }
-    //working on using a queue for a solution path
+    
     // public Queue<Block> solutionPath(){
-    //    mazeQueue= new LinkedList<Block>();
+    //     mazeQueue= new LinkedList<Block>();
     //     mazeQueue.offer(getStart());
     //     while(!mazeQueue.isEmpty()){
-            
+    //     }
     // public Block[][] getNeighbors(){
 
     // }
-    // }
+    
 }

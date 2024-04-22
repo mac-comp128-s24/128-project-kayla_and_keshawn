@@ -43,22 +43,22 @@ public class PenguinMaze {
             if (penguin.getPosition().getY() + penguin.getHeight() >= canvas.getHeight()) {
                 penguin.setPosition(penguin.getPosition().getX(), canvas.getHeight() - penguin.getHeight() - 5);
             }
-            if (penguinTakesDamage()) {
-                System.out.println("Been hit!!!");
-                canvas.remove(penguin);
-                PenguinDude revivedPenguin = new PenguinDude();
-                maze.setPenguin(revivedPenguin);
-                penguin = revivedPenguin;
-            }
+            // if (penguinTakesDamage()) {
+            //     System.out.println("Been hit!!!");
+            //     canvas.remove(penguin);
+            //     PenguinDude revivedPenguin = new PenguinDude();
+            //     maze.setPenguin(revivedPenguin);
+            //     penguin = revivedPenguin;
+            // }
             if (maze.isCompleted) {
                 System.out.println("Yay! We did it!!!");
             }
         });
     }
 
-    public boolean penguinTakesDamage() {
-        return maze.penguinHitWall();
-    }
+    // public boolean penguinTakesDamage() {
+    //     // return maze.penguinHitWall();
+    // }
 
     public static void main(String[] args) {
         PenguinMaze dimensionalCourse = new PenguinMaze();

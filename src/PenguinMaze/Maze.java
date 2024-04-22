@@ -62,10 +62,10 @@ public class Maze {
 
         blocks = new Block[column][row];
 
-        for (int c = 0; c < column; c++) {
-            for (int r = 0; r < row; r++) {
+        for (int r = 0; r < row; r++) {
+            for (int c = 0; c < column; c++) {
                 int next = scanner.nextInt();
-                Block newBlock = new Block(r, c);
+                Block newBlock = new Block(c, r);
                 if (next == 2) {
                     newBlock.setFillColor(Color.BLUE);
                 }
@@ -78,7 +78,7 @@ public class Maze {
                 else if (next == 0) {
                     newBlock.setFillColor(Color.GRAY);
                 }
-                canvas.add(newBlock, r * BLOCK_SIDELENGTH, c * BLOCK_SIDELENGTH);
+                canvas.add(newBlock, c * BLOCK_SIDELENGTH, r * BLOCK_SIDELENGTH);
             }
         }
         scanner.close();

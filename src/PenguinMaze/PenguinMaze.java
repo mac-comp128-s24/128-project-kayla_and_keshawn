@@ -53,7 +53,7 @@ public class PenguinMaze {
                 penguin = revivedPenguin;
             }
             if (maze.isCompleted) {
-                System.out.println("Yay! We did it!!!");
+                System.out.println("Yay! You did it!!!");
             }
         });
     }

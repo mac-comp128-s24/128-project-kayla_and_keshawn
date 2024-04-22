@@ -6,10 +6,12 @@ import java.io.InputStream;
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.GraphicsObject;
 import edu.macalester.graphics.GraphicsText;
+import edu.macalester.graphics.Point;
+
 import java.util.Queue;
 import java.util.Scanner;
+import java.util.ArrayList;
 
-import java.util.LinkedList;
 
 public class Maze {
     private final int BLOCK_SIDELENGTH = 60;
@@ -26,9 +28,9 @@ public class Maze {
         isCompleted = false;
         this.canvas = canvas;
         penguin = new PenguinDude();
-        loadMaze("MazePattern.txt");
-        pengCol = Math.floor(getStart().getPosition().getX() / BLOCK_SIDELENGTH);
-        pengRow = Math.floor(getStart().getPosition().getY() / BLOCK_SIDELENGTH); // Calculates y-coordinate of penguin when game gets configured
+        loadMaze("MazePattern2.txt");
+        pengCol = Math.floor(startBlock.getPosition().getX() / BLOCK_SIDELENGTH);
+        pengRow = Math.floor(startBlock.getPosition().getY() / BLOCK_SIDELENGTH); // Calculates y-coordinate of penguin when game gets configured
         canvas.add(penguin, (pengCol * BLOCK_SIDELENGTH) + 15, (pengRow * BLOCK_SIDELENGTH) + 15);
     }
 
@@ -56,12 +58,16 @@ public class Maze {
                     endBlock = newBlock;
                     newBlock.setFillColor(Color.GREEN);
                 }
+                else if (next == 4) {
+                    newBlock.setFillColor(Color.RED);
+                }
                 else if (next == 1) {
                     newBlock.setFillColor(Color.BLACK);
                 }
                 else if (next == 0) {
                     newBlock.setFillColor(Color.GRAY);
                 }
+                newBlock.setStrokeColor(newBlock.getFillColor());
                 canvas.add(newBlock, c * BLOCK_SIDELENGTH, r * BLOCK_SIDELENGTH);
             }
         }
@@ -78,10 +84,11 @@ public class Maze {
     }
 
     public boolean penguinHitWall() {
-        double penguinXLeft = penguin.getPosition().getX();
-        double penguinYTop = penguin.getPosition().getY();
-        double penguinXRight = penguin.getPosition().getX() + 30;
-        double penguinYBottom = penguin.getPosition().getY() + 30;
+        Point penguinPos = penguin.getPosition();
+        double penguinXLeft = penguinPos.getX();
+        double penguinYTop = penguinPos.getY();
+        double penguinXRight = penguinPos.getX() + 30;
+        double penguinYBottom = penguinPos.getY() + 30;
         GraphicsObject blockAbove = canvas.getElementAt(penguinXLeft - 1, penguinYTop - 1);
         GraphicsObject blockBelow = canvas.getElementAt(penguinXRight + 1, penguinYBottom + 1);
         for (int i = 0; i < blocks.length; i++) {
@@ -92,6 +99,10 @@ public class Maze {
                     }
                     else if (blockAbove.equals(getEnd()) || blockBelow.equals(getEnd())) {
                         isCompleted = true;
+                        return false;
+                    }
+                    else if (blocks[i][j].getFillColor() == Color.RED) {
+                        penguin.setPosition(penguinPos.getX() - (BLOCK_SIDELENGTH * 4) + 5, penguinPos.getY()); // red blocks help you transport across walls if there's no way out otherwise
                         return false;
                     }
                 }

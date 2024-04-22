@@ -21,16 +21,15 @@ public class Maze {
     private Block endBlock;
     private Block startBlock;
     public boolean isCompleted;
-    private Queue<Block> mazeQueue;
     
     public Maze(CanvasWindow canvas){
         isCompleted = false;
         this.canvas = canvas;
         penguin = new PenguinDude();
         loadMaze("MazePattern.txt");
-        pengCol = 1;
+        pengCol = Math.floor(getStart().getPosition().getX() / BLOCK_SIDELENGTH);
         pengRow = Math.floor(getStart().getPosition().getY() / BLOCK_SIDELENGTH); // Calculates y-coordinate of penguin when game gets configured
-        canvas.add(penguin, pengCol + 15, (pengRow * BLOCK_SIDELENGTH) + 15);
+        canvas.add(penguin, (pengCol * BLOCK_SIDELENGTH) + 15, (pengRow * BLOCK_SIDELENGTH) + 15);
     }
 
     private void loadMaze(String mazeText) throws RuntimeException {
@@ -75,7 +74,7 @@ public class Maze {
 
     public void setPenguin(PenguinDude penguin) {
         this.penguin = penguin;
-        canvas.add(penguin, pengCol + 15, (pengRow * BLOCK_SIDELENGTH) + 15);
+        canvas.add(penguin, (pengCol * BLOCK_SIDELENGTH) + 15, (pengRow * BLOCK_SIDELENGTH) + 15);
     }
 
     public boolean penguinHitWall() {

@@ -2,13 +2,15 @@ package PenguinMaze;
 
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.events.Key;
+import java.util.Queue;
 
 public class PenguinMaze {
     
     private CanvasWindow canvas;
     private Maze maze;
-    PenguinDude penguin;
-    int lives;
+    private PenguinDude penguin;
+    private Queue<Block> mazeQueue;
+    private int lives;
 
     public PenguinMaze() {
         canvas = new CanvasWindow("Penguin Maze", 600, 300);

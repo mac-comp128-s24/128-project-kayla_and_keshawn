@@ -145,8 +145,7 @@ public class Maze {
     //             Block newBlock = new Block(c, r);
     //             blocks[r][c] = newBlock;
     //             if (next == 2) {
-    //                 startBlock = newBlock;
-    //                 newBlock.setFillColor(Color.BLUE);
+    //                 InputStream resourceStream = Maze.class.getResourceAsStream("/" + );
     //             }
     //         }
     //     }

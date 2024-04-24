@@ -34,7 +34,7 @@ public class Maze {
         canvas.add(penguin, (pengCol * BLOCK_SIDELENGTH) + 15, (pengRow * BLOCK_SIDELENGTH) + 15);
     }
 
-    private void loadMaze(String mazeText) throws RuntimeException {
+    public void loadMaze(String mazeText) throws RuntimeException {
         InputStream resourceStream = Maze.class.getResourceAsStream("/" + mazeText);
         if (resourceStream == null) {
             throw new RuntimeException("Can't find maze!");
@@ -145,7 +145,7 @@ public class Maze {
     //             Block newBlock = new Block(c, r);
     //             blocks[r][c] = newBlock;
     //             if (next == 2) {
-    //                 InputStream resourceStream = Maze.class.getResourceAsStream("/" + );
+    //                 InputStream resourceStream = Maze.class.getResourceAsStream("/" + MazePattern1 );
     //             }
     //         }
     //     }

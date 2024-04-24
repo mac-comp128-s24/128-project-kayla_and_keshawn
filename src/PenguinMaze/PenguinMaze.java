@@ -53,6 +53,7 @@ public class PenguinMaze {
                 penguin = revivedPenguin;
             }
             if (maze.isCompleted) {
+                maze.loadMaze("MazePattern1.txt");
                 System.out.println("Yay! You did it!!!");
             }
         });

@@ -127,5 +127,28 @@ public class Maze {
     // public Block[][] getNeighbors(){
 
     // }
-    
+
+    // public void nextLevel(String mazeText){
+    //     InputStream resourceStream = Maze.class.getResourceAsStream("/" + mazeText);
+    //     if (resourceStream == null) {
+    //         throw new RuntimeException("Can't find maze!");
+    //     }
+    //     Scanner scanner = new Scanner(resourceStream);
+    //     int row = scanner.nextInt();
+    //     int column = scanner.nextInt();
+
+    //     blocks = new Block[row][column];
+
+    //     for (int r = 0; r < row; r++) {
+    //         for (int c = 0; c < column; c++) {
+    //             int next = scanner.nextInt();
+    //             Block newBlock = new Block(c, r);
+    //             blocks[r][c] = newBlock;
+    //             if (next == 2) {
+    //                 startBlock = newBlock;
+    //                 newBlock.setFillColor(Color.BLUE);
+    //             }
+    //         }
+    //     }
+    // }
 }

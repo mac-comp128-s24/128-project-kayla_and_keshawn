@@ -28,7 +28,7 @@ public class Maze {
         isCompleted = false;
         this.canvas = canvas;
         penguin = new PenguinDude();
-        loadMaze("MazePattern2.txt");
+        loadMaze("movingWalls.txt");
         pengCol = Math.floor(startBlock.getPosition().getX() / BLOCK_SIDELENGTH);
         pengRow = Math.floor(startBlock.getPosition().getY() / BLOCK_SIDELENGTH); // Calculates y-coordinate of penguin when game gets configured
         canvas.add(penguin, (pengCol * BLOCK_SIDELENGTH) + 15, (pengRow * BLOCK_SIDELENGTH) + 15);
@@ -66,6 +66,10 @@ public class Maze {
                 }
                 else if (next == 0) {
                     newBlock.setFillColor(Color.GRAY);
+                }
+                else if(next == 5){
+                    newBlock.setFillColor(Color.PINK);
+                    movingBlock(newBlock);
                 }
                 newBlock.setStrokeColor(newBlock.getFillColor());
                 canvas.add(newBlock, c * BLOCK_SIDELENGTH, r * BLOCK_SIDELENGTH);
@@ -119,35 +123,9 @@ public class Maze {
         return endBlock;
     }
     
-    // public Queue<Block> solutionPath(){
-    //     mazeQueue= new LinkedList<Block>();
-    //     mazeQueue.offer(getStart());
-    //     while(!mazeQueue.isEmpty()){
-    //     }
-    // public Block[][] getNeighbors(){
-
-    // }
-
-    // public void nextLevel(String mazeText){
-    //     InputStream resourceStream = Maze.class.getResourceAsStream("/" + mazeText);
-    //     if (resourceStream == null) {
-    //         throw new RuntimeException("Can't find maze!");
-    //     }
-    //     Scanner scanner = new Scanner(resourceStream);
-    //     int row = scanner.nextInt();
-    //     int column = scanner.nextInt();
-
-    //     blocks = new Block[row][column];
-
-    //     for (int r = 0; r < row; r++) {
-    //         for (int c = 0; c < column; c++) {
-    //             int next = scanner.nextInt();
-    //             Block newBlock = new Block(c, r);
-    //             blocks[r][c] = newBlock;
-    //             if (next == 2) {
-    //                 InputStream resourceStream = Maze.class.getResourceAsStream("/" + MazePattern1 );
-    //             }
-    //         }
-    //     }
-    // }
+    public void movingBlock(Block block){
+        canvas.animate(dt -> {
+            block.move(canvas);
+        });
+    }
 }

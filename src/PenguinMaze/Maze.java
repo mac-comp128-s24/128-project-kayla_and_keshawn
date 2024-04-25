@@ -22,13 +22,14 @@ public class Maze {
     private double pengCol;
     private Block endBlock;
     private Block startBlock;
+    private Color walkingGroundColor = new Color(173, 216, 230);
     public boolean isCompleted;
     
-    public Maze(CanvasWindow canvas){
+    public Maze(CanvasWindow canvas, String mazeFile){
         isCompleted = false;
         this.canvas = canvas;
         penguin = new PenguinDude();
-        loadMaze("movingWalls.txt");
+        loadMaze(mazeFile);
         pengCol = Math.floor(startBlock.getPosition().getX() / BLOCK_SIDELENGTH);
         pengRow = Math.floor(startBlock.getPosition().getY() / BLOCK_SIDELENGTH); // Calculates y-coordinate of penguin when game gets configured
         canvas.add(penguin, (pengCol * BLOCK_SIDELENGTH) + 15, (pengRow * BLOCK_SIDELENGTH) + 15);
@@ -65,7 +66,7 @@ public class Maze {
                     newBlock.setFillColor(Color.BLACK);
                 }
                 else if (next == 0) {
-                    newBlock.setFillColor(Color.GRAY);
+                    newBlock.setFillColor(walkingGroundColor);
                 }
                 else if(next == 5){
                     newBlock.setFillColor(Color.PINK);
@@ -98,7 +99,7 @@ public class Maze {
         for (int i = 0; i < blocks.length; i++) {
             for (int j = 0; j < blocks[i].length; j++) {
                 if (blockAbove.equals(blocks[i][j]) || blockBelow.equals(blocks[i][j])) {
-                    if (blocks[i][j].getFillColor() == Color.BLACK) {
+                    if (blocks[i][j].getFillColor() == Color.BLACK || blocks[i][j].getFillColor() == Color.PINK) {
                         return true;
                     }
                     else if (blockAbove.equals(getEnd()) || blockBelow.equals(getEnd())) {

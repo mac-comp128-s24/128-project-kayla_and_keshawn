@@ -16,22 +16,18 @@ public class Block extends Rectangle{
         double currentX = this.getPosition().getX();
         double currentY = this.getPosition().getY();
         double currentAngleInRadians = Math.toRadians(currentAngle);
-        currentX += -Math.cos(currentAngleInRadians);
+        currentX += -2 * Math.cos(currentAngleInRadians);
 
         if (currentX <= 5) {
-            currentAngle += 180;
-            this.setPosition(currentX, 0);
+            currentAngle = 180 - currentAngle;
+            this.setPosition(currentX, currentY);
         }
-        else if (maze.hitsWall(this)) {
-            currentAngle -= 180;
-            this.setPosition(currentX, 0);
-        }
-        else if (currentY <= 5) {
-            currentAngle = currentAngle * -1;
-            this.setPosition(currentX, 0);
+        else if (currentX + 60 >= canvas.getWidth() - 5) {
+            currentAngle = 180 - currentAngle;
+            this.setPosition(currentX, currentY);
         }
         else {
-            this.setPosition(currentX, 0);
+            this.setPosition(currentX, currentY);
         }
 
     }

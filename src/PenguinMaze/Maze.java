@@ -77,8 +77,9 @@ public class Maze {
         }
         if (scanner.nextInt() == 6) {
             Block moveBlock = new Block(BLOCK_SIDELENGTH, BLOCK_SIDELENGTH);
+            moveBlock.setFillColor(Color.GRAY);
             moveTheBlock(moveBlock);
-            canvas.add(moveBlock, 180, 120);
+            canvas.add(moveBlock, 180, 60);
         }
         scanner.close();
     }
@@ -96,14 +97,14 @@ public class Maze {
         Point objPos = obj.getPosition();
         double objXLeft = objPos.getX();
         double objYTop = objPos.getY();
-        double objXRight = objPos.getX() + 30;
-        double objYBottom = objPos.getY() + 30;
+        double objXRight = objPos.getX() + obj.getWidth();
+        double objYBottom = objPos.getY() + obj.getHeight();
         GraphicsObject blockAbove = canvas.getElementAt(objXLeft - 1, objYTop - 1);
         GraphicsObject blockBelow = canvas.getElementAt(objXRight + 1, objYBottom + 1);
         for (int i = 0; i < blocks.length; i++) {
             for (int j = 0; j < blocks[i].length; j++) {
                 if (blockAbove.equals(blocks[i][j]) || blockBelow.equals(blocks[i][j])) {
-                    if (blocks[i][j].getFillColor() == Color.BLACK || blocks[i][j].getFillColor() == Color.PINK) {
+                    if (blocks[i][j].getFillColor() == Color.BLACK) {
                         return true;
                     }
                     else if (blockAbove.equals(getEnd()) || blockBelow.equals(getEnd())) {
@@ -142,7 +143,7 @@ public class Maze {
     }
 
     public void moveTheBlock(Block block) {
-        canvas.animate(dt -> {
+        canvas.animate((dt) -> {
             block.move(canvas, this);
         });
     }

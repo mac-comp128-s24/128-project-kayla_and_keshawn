@@ -22,7 +22,7 @@ public class PenguinMaze {
         canvas = new CanvasWindow("Penguin Maze", 600, 300);
         levelFiles = List.of("MazePattern1.txt", "MazePattern2.txt", "MovingWalls.txt");
         iter = levelFiles.iterator();
-        maze = new Maze(canvas, iter.next());
+        maze = new Maze(canvas, levelFiles.get(2));
         penguin = maze.getPenguin();
         lives = 3;
     }
@@ -72,7 +72,7 @@ public class PenguinMaze {
     }
 
     public boolean penguinTakesDamage() {
-        return maze.penguinHitWall();
+        return maze.hitsWall(penguin);
     }
 
     public static void main(String[] args) {

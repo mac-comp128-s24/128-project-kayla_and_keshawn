@@ -10,7 +10,6 @@ import edu.macalester.graphics.Point;
 
 import java.util.Queue;
 import java.util.Scanner;
-import java.util.ArrayList;
 
 
 public class Maze {
@@ -69,12 +68,17 @@ public class Maze {
                     newBlock.setFillColor(walkingGroundColor);
                 }
                 else if(next == 5){
-                    newBlock.setFillColor(Color.PINK);
-                    movingBlock(newBlock);
+                    newBlock.setFillColor(walkingGroundColor);
+                    changingColorBlock(newBlock);
                 }
                 newBlock.setStrokeColor(newBlock.getFillColor());
                 canvas.add(newBlock, c * BLOCK_SIDELENGTH, r * BLOCK_SIDELENGTH);
             }
+        }
+        if (scanner.nextInt() == 6) {
+            Block moveBlock = new Block(BLOCK_SIDELENGTH, BLOCK_SIDELENGTH);
+            moveTheBlock(moveBlock);
+            canvas.add(moveBlock, 180, 120);
         }
         scanner.close();
     }
@@ -88,14 +92,14 @@ public class Maze {
         canvas.add(penguin, (pengCol * BLOCK_SIDELENGTH) + 15, (pengRow * BLOCK_SIDELENGTH) + 15);
     }
 
-    public boolean penguinHitWall() {
-        Point penguinPos = penguin.getPosition();
-        double penguinXLeft = penguinPos.getX();
-        double penguinYTop = penguinPos.getY();
-        double penguinXRight = penguinPos.getX() + 30;
-        double penguinYBottom = penguinPos.getY() + 30;
-        GraphicsObject blockAbove = canvas.getElementAt(penguinXLeft - 1, penguinYTop - 1);
-        GraphicsObject blockBelow = canvas.getElementAt(penguinXRight + 1, penguinYBottom + 1);
+    public boolean hitsWall(GraphicsObject obj) {
+        Point objPos = obj.getPosition();
+        double objXLeft = objPos.getX();
+        double objYTop = objPos.getY();
+        double objXRight = objPos.getX() + 30;
+        double objYBottom = objPos.getY() + 30;
+        GraphicsObject blockAbove = canvas.getElementAt(objXLeft - 1, objYTop - 1);
+        GraphicsObject blockBelow = canvas.getElementAt(objXRight + 1, objYBottom + 1);
         for (int i = 0; i < blocks.length; i++) {
             for (int j = 0; j < blocks[i].length; j++) {
                 if (blockAbove.equals(blocks[i][j]) || blockBelow.equals(blocks[i][j])) {
@@ -107,7 +111,7 @@ public class Maze {
                         return false;
                     }
                     else if (blocks[i][j].getFillColor() == Color.RED) {
-                        penguin.setPosition(penguinPos.getX() - (BLOCK_SIDELENGTH * 4) + 5, penguinPos.getY()); // red blocks help you transport across walls if there's no way out otherwise
+                        penguin.setPosition(objPos.getX() - (BLOCK_SIDELENGTH * 4) + 5, objPos.getY()); // red blocks help you transport across walls if there's no way out otherwise
                         return false;
                     }
                 }
@@ -124,9 +128,22 @@ public class Maze {
         return endBlock;
     }
     
-    public void movingBlock(Block block){
+    double time = 0;
+    public void changingColorBlock(Block block){
         canvas.animate(dt -> {
-            block.move(canvas);
+            time += dt;
+            if ((int) time % 2 == 0) {
+                block.setFillColor(Color.BLACK);
+            }
+            else {
+                block.setFillColor(walkingGroundColor);
+            }
+        });
+    }
+
+    public void moveTheBlock(Block block) {
+        canvas.animate(dt -> {
+            block.move(canvas, this);
         });
     }
 }

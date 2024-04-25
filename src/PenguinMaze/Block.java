@@ -10,11 +10,21 @@ public class Block extends Rectangle{
     }
     
     public void move(CanvasWindow canvas){
-        if (this.getPosition().getX() < 5) {
-            this.moveBy(10, 0);
+        //double xBlock = this.getPosition().getX();
+        //for(Object xBlock: Block){
+            if (this.getPosition().getX() < 5) {
+                this.moveBy(10, 0);
+            }
+            else {
+                this.moveBy(-10, 0);
+            }
         }
-        else {
-            this.moveBy(-10, 0);
-        }
+        // if (this.getPosition().getX() < 5) {
+        //     this.moveBy(10, 0);
+        // }
+        // else {
+        //     this.moveBy(-10, 0);
+        // }
+        this.moveBy(10, 0);
     }
 }

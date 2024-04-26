@@ -10,6 +10,6 @@ public class startScreen {
 
     private int lives;
     public startScreen(){
-
+        canvas = new CanvasWindow("Penguin Maze", 600, 300);
     }
 }

@@ -18,10 +18,10 @@ public class PenguinMaze {
     private int lives;
 
     public PenguinMaze() {
-        canvas = new CanvasWindow("Penguin Maze", 600, 300);
-        levelFiles = List.of("MazePattern1.txt", "MazePattern2.txt", "MovingWalls.txt");
+        canvas = new CanvasWindow("Penguin Maze", 600, 600);
+        levelFiles = List.of("level4.txt", "level5.txt", "level6.txt", "MazePattern1.txt", "MazePattern2.txt", "MovingWalls.txt");
         iter = levelFiles.iterator();
-        maze = new Maze(canvas, levelFiles.get(2));
+        maze = new Maze(canvas, iter.next());
         penguin = maze.getPenguin();
         lives = 3;
     }

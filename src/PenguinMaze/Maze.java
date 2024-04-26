@@ -34,6 +34,12 @@ public class Maze {
         canvas.add(penguin, (pengCol * BLOCK_SIDELENGTH) + 15, (pengRow * BLOCK_SIDELENGTH) + 15);
     }
 
+    /**
+     * Configures the maze from the mazeText.
+     * Iterates through each block to determine whether the penguin can walk on it.
+     * @param mazeText
+     * @throws RuntimeException
+     */
     public void loadMaze(String mazeText) throws RuntimeException {
         InputStream resourceStream = Maze.class.getResourceAsStream("/" + mazeText);
         if (resourceStream == null) {
@@ -50,24 +56,24 @@ public class Maze {
                 int next = scanner.nextInt();
                 Block newBlock = new Block(c, r);
                 blocks[r][c] = newBlock;
-                if (next == 2) {
+                if (next == 2) { // Indicates the start block
                     startBlock = newBlock;
                     newBlock.setFillColor(Color.BLUE);
                 }
-                else if (next == 3) {
+                else if (next == 3) { // Indicates the end block
                     endBlock = newBlock;
                     newBlock.setFillColor(Color.GREEN);
                 }
-                else if (next == 4) {
+                else if (next == 4) { // Indicates the block that transports penguin exactly 115 units to the left
                     newBlock.setFillColor(Color.RED);
                 }
-                else if (next == 1) {
+                else if (next == 1) { // Indicates wall
                     newBlock.setFillColor(Color.BLACK);
                 }
-                else if (next == 0) {
+                else if (next == 0) { // Indicates walking space
                     newBlock.setFillColor(walkingGroundColor);
                 }
-                else if(next == 5){
+                else if(next == 5){ // Indicates block(s) that alternate between being a wall and a walking space
                     newBlock.setFillColor(walkingGroundColor);
                     changingColorBlock(newBlock);
                 }
@@ -75,7 +81,7 @@ public class Maze {
                 canvas.add(newBlock, c * BLOCK_SIDELENGTH, r * BLOCK_SIDELENGTH);
             }
         }
-        if (scanner.nextInt() == 6) { // says whether or not moving block would be added to maze level
+        if (scanner.nextInt() == 6) { // says whether or not a moving block would be added to maze level
             Block moveBlock = new Block(BLOCK_SIDELENGTH, BLOCK_SIDELENGTH);
             moveBlock.setFillColor(Color.GRAY);
             moveTheBlock(moveBlock);
@@ -84,15 +90,28 @@ public class Maze {
         scanner.close();
     }
 
+    /**
+     * 
+     * @return penguin initiated by the maze
+     */
     public PenguinDude getPenguin() {
         return penguin;
     }
 
+    /**
+     * Setter method for a penguin to update the maze on what penguin is being used.
+     * @param penguin
+     */
     public void setPenguin(PenguinDude penguin) {
         this.penguin = penguin;
         canvas.add(penguin, (pengCol * BLOCK_SIDELENGTH) + 15, (pengRow * BLOCK_SIDELENGTH) + 15);
     }
 
+    /**
+     * Iterates through each block to see which block the penguin is on.
+     * @param obj
+     * @return true if penguin hits block that acts as wall and false otherwise
+     */
     public boolean hitsWall(GraphicsObject obj) {
         Point objPos = obj.getPosition();
         double objXLeft = objPos.getX();
@@ -129,6 +148,9 @@ public class Maze {
         return endBlock;
     }
     
+    /**
+     * Deals with the timing of when the alternating block changes color
+     */
     double time = 0;
     public void changingColorBlock(Block block){
         canvas.animate(dt -> {
@@ -142,6 +164,10 @@ public class Maze {
         });
     }
 
+    /**
+     * Initiates the movement of the block. Mainly used for moving blocks.
+     * @param block
+     */
     public void moveTheBlock(Block block) {
         canvas.animate((dt) -> {
             block.move(canvas, this);

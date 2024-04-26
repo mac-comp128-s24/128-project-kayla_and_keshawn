@@ -3,7 +3,6 @@ package PenguinMaze;
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.events.Key;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Queue;
@@ -27,6 +26,10 @@ public class PenguinMaze {
         lives = 3;
     }
 
+    /**
+     * Controls main movement of penguin; makes it move up, down, left and right.
+     * It also iterates through the list of text files that make up the mazes
+     */
     public void run() {
         canvas.onKeyDown((event) -> {
             if (event.getKey() == Key.RIGHT_ARROW) {
@@ -53,7 +56,7 @@ public class PenguinMaze {
             if (penguin.getPosition().getY() + penguin.getHeight() >= canvas.getHeight()) {
                 penguin.setPosition(penguin.getPosition().getX(), canvas.getHeight() - penguin.getHeight() - 5);
             }
-            if (penguinTakesDamage()) {
+            if (penguinTakesDamage()) { // what to do when penguin hits wall
                 System.out.println("Been hit!!!");
                 canvas.remove(penguin);
                 PenguinDude revivedPenguin = new PenguinDude();

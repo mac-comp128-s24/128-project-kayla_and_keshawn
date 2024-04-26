@@ -75,7 +75,7 @@ public class Maze {
                 canvas.add(newBlock, c * BLOCK_SIDELENGTH, r * BLOCK_SIDELENGTH);
             }
         }
-        if (scanner.nextInt() == 6) {
+        if (scanner.nextInt() == 6) { // says whether or not moving block would be added to maze level
             Block moveBlock = new Block(BLOCK_SIDELENGTH, BLOCK_SIDELENGTH);
             moveBlock.setFillColor(Color.GRAY);
             moveTheBlock(moveBlock);
@@ -133,7 +133,7 @@ public class Maze {
     public void changingColorBlock(Block block){
         canvas.animate(dt -> {
             time += dt;
-            if ((int) time % 2 == 0) {
+            if ((int) time % 3 == 0) {
                 block.setFillColor(Color.BLACK);
             }
             else {

@@ -12,6 +12,11 @@ public class Block extends Rectangle{
         currentAngle = 0;
     }
     
+    /**
+     * Says how block moves if necessary.
+     * @param canvas
+     * @param maze
+     */
     public void move(CanvasWindow canvas, Maze maze){
         double currentX = this.getPosition().getX();
         double currentY = this.getPosition().getY();
@@ -29,6 +34,5 @@ public class Block extends Rectangle{
         else {
             this.setPosition(currentX, currentY);
         }
-
     }
 }

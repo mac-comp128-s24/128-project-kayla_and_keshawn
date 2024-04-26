@@ -133,7 +133,7 @@ public class Maze {
     public void changingColorBlock(Block block){
         canvas.animate(dt -> {
             time += dt;
-            if ((int) time % 3 == 0) {
+            if ((int) time % 5 == 0) {
                 block.setFillColor(Color.BLACK);
             }
             else {

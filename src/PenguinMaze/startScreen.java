@@ -4,6 +4,8 @@ import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.FontStyle;
 import edu.macalester.graphics.GraphicsGroup;
 import edu.macalester.graphics.GraphicsText;
+import edu.macalester.graphics.Image;
+import edu.macalester.graphics.TextAlignment;
 import edu.macalester.graphics.events.Key;
 import edu.macalester.graphics.ui.Button;
 import edu.macalester.graphics.ui.TextField;
@@ -18,17 +20,18 @@ public class StartScreen {
     }
 
     private void setupUI(){
-        mazeDisplay = new GraphicsText("PENGUIN MAZE");
-        mazeDisplay.setFont("monospaced, Courier New", FontStyle.PLAIN, 50);
-        canvas.add(mazeDisplay, 300, 300);
-
-        // GraphicsGroup uiGroup = new GraphicsGroup();
+        GraphicsGroup uiGroup = new GraphicsGroup();
+        Image startPage = new Image("StartPage.png");
+        startPage.setMaxWidth(600);
+        startPage.setMaxHeight(600);
+        uiGroup.add(startPage);
+        canvas.add(uiGroup);
 
         TextField filenameField = new TextField();
         filenameField.setText("maze-2");
 
         Button loadButton = new Button("Load Maze");
-        canvas.add(loadButton);
+        canvas.add(loadButton, 250, 350);
         loadButton.onClick(() -> {
             canvas.removeAll();
             PenguinMaze penguinMaze = new PenguinMaze(canvas);

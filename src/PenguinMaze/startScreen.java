@@ -1,21 +1,16 @@
 package PenguinMaze;
 
 import edu.macalester.graphics.CanvasWindow;
-import edu.macalester.graphics.FontStyle;
 import edu.macalester.graphics.GraphicsGroup;
-import edu.macalester.graphics.GraphicsText;
 import edu.macalester.graphics.Image;
-import edu.macalester.graphics.TextAlignment;
-import edu.macalester.graphics.events.Key;
 import edu.macalester.graphics.ui.Button;
 import edu.macalester.graphics.ui.TextField;
 
 public class StartScreen {
     private CanvasWindow canvas;
-    private GraphicsText mazeDisplay;
 
     public StartScreen(){
-        canvas = new CanvasWindow("Penguin Maze", 600, 600);
+        canvas = new CanvasWindow("Penguin Path", 600, 600);
         
     }
 

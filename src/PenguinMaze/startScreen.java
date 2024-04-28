@@ -8,27 +8,35 @@ import edu.macalester.graphics.events.Key;
 import edu.macalester.graphics.ui.Button;
 import edu.macalester.graphics.ui.TextField;
 
-public class startScreen {
+public class StartScreen {
     private CanvasWindow canvas;
-    private Maze maze;
-    private PenguinDude penguin;
 
-    private int lives;
-    public startScreen(){
-        canvas = new CanvasWindow("Penguin Maze", 600, 300);
+    public StartScreen(){
+        canvas = new CanvasWindow("Penguin Maze", 600, 600);
         
     }
+
     private void setupUI(){
         // mazeDisplay = new GraphicsText();
         // mazeDisplay.setFont("monospaced, Courier New", FontStyle.PLAIN, 14);
         // canvas.add(mazeDisplay, 50, 50);
 
-        GraphicsGroup uiGroup = new GraphicsGroup();
+        // GraphicsGroup uiGroup = new GraphicsGroup();
 
         TextField filenameField = new TextField();
         filenameField.setText("maze-2");
 
         Button loadButton = new Button("Load Maze");
-        loadButton.onClick( () -> maze.loadMaze("MazePattern1.txt") );
+        canvas.add(loadButton);
+        loadButton.onClick(() -> {
+            canvas.removeAll();
+            PenguinMaze penguinMaze = new PenguinMaze(canvas);
+            penguinMaze.run();
+        });
+    }
+
+    public static void main(String[] args) {
+        StartScreen startScreen = new StartScreen();
+        startScreen.setupUI();
     }
 }

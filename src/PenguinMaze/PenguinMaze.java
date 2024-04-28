@@ -17,8 +17,8 @@ public class PenguinMaze {
     private Queue<Block> mazeQueue;
     private int lives;
 
-    public PenguinMaze() {
-        canvas = new CanvasWindow("Penguin Maze", 600, 600);
+    public PenguinMaze(CanvasWindow canvas) {
+        this.canvas = canvas;
         levelFiles = List.of("level4.txt", "level5.txt", "level6.txt", "MazePattern1.txt", "MazePattern2.txt", "MovingWalls.txt");
         iter = levelFiles.iterator();
         maze = new Maze(canvas, iter.next());
@@ -76,10 +76,5 @@ public class PenguinMaze {
 
     public boolean penguinTakesDamage() {
         return maze.hitsWall(penguin);
-    }
-
-    public static void main(String[] args) {
-        PenguinMaze dimensionalCourse = new PenguinMaze();
-        dimensionalCourse.run();
     }
 }

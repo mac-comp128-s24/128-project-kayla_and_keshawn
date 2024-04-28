@@ -19,7 +19,7 @@ public class PenguinMaze {
 
     public PenguinMaze(CanvasWindow canvas) {
         this.canvas = canvas;
-        levelFiles = List.of("level4.txt", "level5.txt", "level6.txt", "MazePattern1.txt", "MazePattern2.txt", "MovingWalls.txt");
+        levelFiles = List.of("MazePattern1.txt", "MazePattern2.txt", "MovingWalls.txt", "level4.txt", "level5.txt", "level6.txt");
         iter = levelFiles.iterator();
         maze = new Maze(canvas, iter.next());
         penguin = maze.getPenguin();
@@ -69,6 +69,9 @@ public class PenguinMaze {
                     canvas.removeAll();
                     maze = new Maze(canvas, iter.next());
                     penguin = maze.getPenguin();
+                }
+                else {
+                    
                 }
             }
         });

@@ -10,6 +10,7 @@ import edu.macalester.graphics.ui.TextField;
 
 public class StartScreen {
     private CanvasWindow canvas;
+    private GraphicsText mazeDisplay;
 
     public StartScreen(){
         canvas = new CanvasWindow("Penguin Maze", 600, 600);
@@ -17,9 +18,9 @@ public class StartScreen {
     }
 
     private void setupUI(){
-        // mazeDisplay = new GraphicsText();
-        // mazeDisplay.setFont("monospaced, Courier New", FontStyle.PLAIN, 14);
-        // canvas.add(mazeDisplay, 50, 50);
+        mazeDisplay = new GraphicsText("PENGUIN MAZE");
+        mazeDisplay.setFont("monospaced, Courier New", FontStyle.PLAIN, 50);
+        canvas.add(mazeDisplay, 300, 300);
 
         // GraphicsGroup uiGroup = new GraphicsGroup();
 

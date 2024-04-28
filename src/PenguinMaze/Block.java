@@ -21,7 +21,7 @@ public class Block extends Rectangle{
         double currentX = this.getPosition().getX();
         double currentY = this.getPosition().getY();
         double currentAngleInRadians = Math.toRadians(currentAngle);
-        currentX += -2.8 * Math.cos(currentAngleInRadians);
+        currentX += -2.8 * Math.cos(currentAngleInRadians); // determines the block's moving speed
 
         if (currentX <= 5) {
             currentAngle = 180 - currentAngle;

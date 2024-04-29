@@ -16,9 +16,12 @@ public class Maze {
     private final int BLOCK_SIDELENGTH = 60;
     private Block[][] blocks;
     private PenguinDude penguin;
+    private IglooHome igloo;
     private CanvasWindow canvas;
     private double pengRow;
     private double pengCol;
+    private double igRow;
+    private double igCol;
     private Block endBlock;
     private Block startBlock;
     private Color walkingGroundColor = new Color(173, 216, 230);
@@ -30,10 +33,14 @@ public class Maze {
         isPaused = false;
         this.canvas = canvas;
         penguin = new PenguinDude();
+        igloo = new IglooHome();
         loadMaze(mazeFile);
         pengCol = Math.floor(startBlock.getPosition().getX() / BLOCK_SIDELENGTH);
         pengRow = Math.floor(startBlock.getPosition().getY() / BLOCK_SIDELENGTH); // Calculates y-coordinate of penguin when game gets configured
+        igCol = Math.floor(endBlock.getPosition().getX() / BLOCK_SIDELENGTH);
+        igRow = Math.floor(endBlock.getPosition().getY() / BLOCK_SIDELENGTH); // Calculates y-coordinate of igloo when game gets configured
         canvas.add(penguin, (pengCol * BLOCK_SIDELENGTH) + 15, (pengRow * BLOCK_SIDELENGTH) + 15);
+        canvas.add(igloo, (igCol * BLOCK_SIDELENGTH) + 15, (igRow * BLOCK_SIDELENGTH) + 15);
     }
 
     /**
@@ -64,7 +71,6 @@ public class Maze {
                 }
                 else if (next == 3) { // Indicates the end block
                     endBlock = newBlock;
-                    newBlock.setFillColor(Color.GREEN);
                 }
                 else if (next == 4) { // Indicates the block that transports penguin exactly 115 units to the left
                     newBlock.setFillColor(Color.RED);

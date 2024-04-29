@@ -22,12 +22,6 @@ public class StartScreen {
         instructions = new GraphicsText();
     }
 
-    // public StartScreen(CanvasWindow canvas) {
-    //     this.canvas = canvas;
-    //     canvas.setBackground(CANVAS_COLOR);
-    //     instructions = new GraphicsText();
-    // }
-
     public void setupUI(){
         GraphicsGroup uiGroup = new GraphicsGroup();
         Image startPage = new Image("StartPage.png");

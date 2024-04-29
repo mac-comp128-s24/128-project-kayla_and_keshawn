@@ -25,8 +25,8 @@ public class StartScreen {
         TextField filenameField = new TextField();
         filenameField.setText("maze-2");
 
-        Button loadButton = new Button("Load Maze");
-        canvas.add(loadButton, 250, 350);
+        Button loadButton = new Button("Start!");
+        canvas.add(loadButton, 350, 400);
         loadButton.onClick(() -> {
             canvas.removeAll();
             PenguinMaze penguinMaze = new PenguinMaze(canvas);

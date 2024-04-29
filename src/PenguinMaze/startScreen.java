@@ -22,7 +22,13 @@ public class StartScreen {
         instructions = new GraphicsText();
     }
 
-    private void setupUI(){
+    // public StartScreen(CanvasWindow canvas) {
+    //     this.canvas = canvas;
+    //     canvas.setBackground(CANVAS_COLOR);
+    //     instructions = new GraphicsText();
+    // }
+
+    public void setupUI(){
         GraphicsGroup uiGroup = new GraphicsGroup();
         Image startPage = new Image("StartPage.png");
         startPage.setMaxWidth(600);
@@ -36,28 +42,53 @@ public class StartScreen {
         instructions.setFont("rockwell condensed", FontStyle.BOLD, 20);
         canvas.add(instructions, 300, 480);
 
-        Rectangle startBlock = new Rectangle(125, 525, 20, 20);
+        Rectangle startBlock = new Rectangle(80, 525, 20, 20);
         startBlock.setFillColor(Color.BLUE);
         canvas.add(startBlock);
+        GraphicsText startBlockText = new GraphicsText("Where you'll start!");
+        startBlockText.setFillColor(new Color(173, 216, 230));
+        startBlockText.setAlignment(TextAlignment.LEFT);
+        startBlockText.setFont("rockwell condensed", FontStyle.BOLD, 20);
+        canvas.add(startBlockText, 105, 540);
 
         IglooHome igloo = new IglooHome();
-        canvas.add(igloo, 250, 525);
+        canvas.add(igloo, 380, 525);
+        GraphicsText endBlockText = new GraphicsText("Your end goal!");
+        endBlockText.setFillColor(new Color(173, 216, 230));
+        endBlockText.setAlignment(TextAlignment.LEFT);
+        endBlockText.setFont("rockwell condensed", FontStyle.BOLD, 20);
+        canvas.add(endBlockText, 430, 550);
 
-        Rectangle wallBlock = new Rectangle(125, 555, 20, 20);
+        Rectangle wallBlock = new Rectangle(80, 555, 20, 20);
         wallBlock.setFillColor(Color.BLACK);
         canvas.add(wallBlock);
+        GraphicsText wallBlockText = new GraphicsText("What to avoid! (you'll die)");
+        wallBlockText.setFillColor(new Color(173, 216, 230));
+        wallBlockText.setAlignment(TextAlignment.LEFT);
+        wallBlockText.setFont("rockwell condensed", FontStyle.BOLD, 20);
+        canvas.add(wallBlockText, 105, 570);
         
-        Rectangle transportBlock = new Rectangle(125, 585, 20, 20);
+        Rectangle transportBlock = new Rectangle(80, 585, 20, 20);
         transportBlock.setFillColor(Color.RED);
         canvas.add(transportBlock);
+        GraphicsText transportBlockText = new GraphicsText("Moves you 2 blocks to the left!");
+        transportBlockText.setFillColor(new Color(173, 216, 230));
+        transportBlockText.setAlignment(TextAlignment.LEFT);
+        transportBlockText.setFont("rockwell condensed", FontStyle.BOLD, 20);
+        canvas.add(transportBlockText, 105, 600);
 
-        Rectangle movingBlock = new Rectangle(125, 615, 20, 20);
+        Rectangle movingBlock = new Rectangle(80, 615, 20, 20);
         movingBlock.setFillColor(Color.GRAY);
         canvas.add(movingBlock);
+        GraphicsText movingBlockText = new GraphicsText("Can help you complete levels quicker!");
+        movingBlockText.setFillColor(new Color(173, 216, 230));
+        movingBlockText.setAlignment(TextAlignment.LEFT);
+        movingBlockText.setFont("rockwell condensed", FontStyle.BOLD, 20);
+        canvas.add(movingBlockText, 105, 630);
 
-        Button loadButton = new Button("START!");
-        canvas.add(loadButton, 350, 400);
-        loadButton.onClick(() -> {
+        Button startButton = new Button("START!");
+        canvas.add(startButton, 350, 400);
+        startButton.onClick(() -> {
             canvas.removeAll();
             PenguinMaze penguinMaze = new PenguinMaze(canvas);
             penguinMaze.run();

@@ -5,6 +5,7 @@ import edu.macalester.graphics.FontStyle;
 import edu.macalester.graphics.GraphicsText;
 import edu.macalester.graphics.TextAlignment;
 import edu.macalester.graphics.events.Key;
+import edu.macalester.graphics.ui.Button;
 
 import java.awt.Color;
 import java.util.Iterator;
@@ -19,6 +20,7 @@ public class PenguinMaze {
     private Iterator<String> iter;
     private int lives;
     private GraphicsText livesLeft;
+    private Button backToStartScreen;
 
     public PenguinMaze(CanvasWindow canvas) {
         this.canvas = canvas;
@@ -33,6 +35,13 @@ public class PenguinMaze {
         livesLeft.setFont("Arial", FontStyle.BOLD, 20);
         livesLeft.setAlignment(TextAlignment.LEFT);
         canvas.add(livesLeft, 0, 20);
+
+        backToStartScreen = new Button("Back To Start!");
+        backToStartScreen.onClick(() -> {
+            canvas.closeWindow();
+            StartScreen startScreen = new StartScreen();
+            startScreen.setupUI();
+        });
     }
 
     /**
@@ -77,6 +86,7 @@ public class PenguinMaze {
                     PenguinDude lossPenguin = new PenguinDude();
                     lossPenguin.setLossPenguin();
                     canvas.add(lossPenguin);
+                    canvas.add(backToStartScreen, 250, 500);
                     maze.isPaused = true;
                 }
             }
@@ -93,6 +103,8 @@ public class PenguinMaze {
                     PenguinDude winPenguin = new PenguinDude();
                     winPenguin.setWinPenguin();
                     canvas.add(winPenguin);
+                    canvas.add(backToStartScreen, 250, 500);
+                    maze.isPaused = true;
                 }
             }
         });

@@ -3,6 +3,7 @@ package PenguinMaze;
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.GraphicsGroup;
 import edu.macalester.graphics.Image;
+import edu.macalester.graphics.Rectangle;
 import edu.macalester.graphics.ui.Button;
 
 public class StartScreen {
@@ -19,6 +20,8 @@ public class StartScreen {
         startPage.setMaxHeight(650);
         uiGroup.add(startPage);
         canvas.add(uiGroup);
+
+        Block transportBlock = new Block(0, 0);
 
         Button loadButton = new Button("START!");
         canvas.add(loadButton, 350, 400);

@@ -124,7 +124,10 @@ public class Maze {
         GraphicsObject blockBelow = canvas.getElementAt(objXRight + 1, objYBottom + 1);
         for (int i = 0; i < blocks.length; i++) {
             for (int j = 0; j < blocks[i].length; j++) {
-                if (blockAbove.equals(blocks[i][j]) || blockBelow.equals(blocks[i][j])) {
+                if (blockAbove == null || blockBelow == null) {
+                    return true;
+                }
+                else if (blockAbove.equals(blocks[i][j]) || blockBelow.equals(blocks[i][j])) {
                     if (blocks[i][j].getFillColor() == Color.BLACK) {
                         return true;
                     }

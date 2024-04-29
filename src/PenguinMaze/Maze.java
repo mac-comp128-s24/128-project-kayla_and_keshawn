@@ -16,22 +16,31 @@ public class Maze {
     private final int BLOCK_SIDELENGTH = 60;
     private Block[][] blocks;
     private PenguinDude penguin;
+    private IglooHome igloo;
     private CanvasWindow canvas;
     private double pengRow;
     private double pengCol;
+    private double igRow;
+    private double igCol;
     private Block endBlock;
     private Block startBlock;
     private Color walkingGroundColor = new Color(173, 216, 230);
+    public boolean isPaused;
     public boolean isCompleted;
     
     public Maze(CanvasWindow canvas, String mazeFile){
         isCompleted = false;
+        isPaused = false;
         this.canvas = canvas;
         penguin = new PenguinDude();
+        igloo = new IglooHome();
         loadMaze(mazeFile);
         pengCol = Math.floor(startBlock.getPosition().getX() / BLOCK_SIDELENGTH);
         pengRow = Math.floor(startBlock.getPosition().getY() / BLOCK_SIDELENGTH); // Calculates y-coordinate of penguin when game gets configured
+        igCol = Math.floor(endBlock.getPosition().getX() / BLOCK_SIDELENGTH);
+        igRow = Math.floor(endBlock.getPosition().getY() / BLOCK_SIDELENGTH); // Calculates y-coordinate of igloo when game gets configured
         canvas.add(penguin, (pengCol * BLOCK_SIDELENGTH) + 15, (pengRow * BLOCK_SIDELENGTH) + 15);
+        canvas.add(igloo, (igCol * BLOCK_SIDELENGTH) + 15, (igRow * BLOCK_SIDELENGTH) + 15);
     }
 
     /**
@@ -62,7 +71,6 @@ public class Maze {
                 }
                 else if (next == 3) { // Indicates the end block
                     endBlock = newBlock;
-                    newBlock.setFillColor(Color.GREEN);
                 }
                 else if (next == 4) { // Indicates the block that transports penguin exactly 115 units to the left
                     newBlock.setFillColor(Color.RED);
@@ -85,7 +93,7 @@ public class Maze {
             Block moveBlock = new Block(BLOCK_SIDELENGTH, BLOCK_SIDELENGTH);
             moveBlock.setFillColor(Color.GRAY);
             moveTheBlock(moveBlock);
-            canvas.add(moveBlock, 180, 60);
+            canvas.add(moveBlock, 180, 120);
         }
         scanner.close();
     }
@@ -122,7 +130,10 @@ public class Maze {
         GraphicsObject blockBelow = canvas.getElementAt(objXRight + 1, objYBottom + 1);
         for (int i = 0; i < blocks.length; i++) {
             for (int j = 0; j < blocks[i].length; j++) {
-                if (blockAbove.equals(blocks[i][j]) || blockBelow.equals(blocks[i][j])) {
+                if (blockAbove == null || blockBelow == null) {
+                    return true;
+                }
+                else if (blockAbove.equals(blocks[i][j]) || blockBelow.equals(blocks[i][j])) {
                     if (blocks[i][j].getFillColor() == Color.BLACK) {
                         return true;
                     }
@@ -154,12 +165,14 @@ public class Maze {
     double time = 0;
     public void changingColorBlock(Block block){
         canvas.animate(dt -> {
-            time += dt;
-            if ((int) time % 10 == 0) {
-                block.setFillColor(Color.BLACK);
-            }
-            else {
-                block.setFillColor(walkingGroundColor);
+            if (!isPaused) {
+                time += dt;
+                if ((int) time % 7 == 0) {
+                    block.setFillColor(Color.BLACK);
+                }
+                else {
+                    block.setFillColor(walkingGroundColor);
+                }
             }
         });
     }
@@ -170,7 +183,9 @@ public class Maze {
      */
     public void moveTheBlock(Block block) {
         canvas.animate((dt) -> {
-            block.move(canvas, this);
+            if (!isPaused) {
+                block.move(canvas, this);
+            }
         });
     }
 }

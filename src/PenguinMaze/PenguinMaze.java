@@ -1,29 +1,38 @@
 package PenguinMaze;
 
 import edu.macalester.graphics.CanvasWindow;
+import edu.macalester.graphics.FontStyle;
+import edu.macalester.graphics.GraphicsText;
+import edu.macalester.graphics.TextAlignment;
 import edu.macalester.graphics.events.Key;
 
+import java.awt.Color;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Queue;
 
 public class PenguinMaze {
-    
+
     private CanvasWindow canvas;
     private Maze maze;
     private PenguinDude penguin;
     private List<String> levelFiles;
     private Iterator<String> iter;
-    private Queue<Block> mazeQueue;
     private int lives;
+    private GraphicsText livesLeft;
 
     public PenguinMaze(CanvasWindow canvas) {
         this.canvas = canvas;
-        levelFiles = List.of("MazePattern1.txt", "MazePattern2.txt", "MovingWalls.txt", "level4.txt", "level5.txt", "level6.txt");
+        levelFiles = List.of("MazePattern1.txt", "MazePattern2.txt", "MovingWalls.txt", "Level4.txt", "Level5.txt", "Level6.txt");
         iter = levelFiles.iterator();
         maze = new Maze(canvas, iter.next());
         penguin = maze.getPenguin();
-        lives = 3;
+        lives = 5;
+
+        livesLeft = new GraphicsText("Lives: " + lives);
+        livesLeft.setFillColor(Color.WHITE);
+        livesLeft.setFont("Arial", FontStyle.BOLD, 20);
+        livesLeft.setAlignment(TextAlignment.LEFT);
+        canvas.add(livesLeft, 0, 20);
     }
 
     /**
@@ -57,15 +66,22 @@ public class PenguinMaze {
                 penguin.setPosition(penguin.getPosition().getX(), canvas.getHeight() - penguin.getHeight() - 5);
             }
             if (penguinTakesDamage()) { // what to do when penguin hits wall
-                System.out.println("Been hit!!!");
                 canvas.remove(penguin);
                 PenguinDude revivedPenguin = new PenguinDude();
                 maze.setPenguin(revivedPenguin);
                 penguin = revivedPenguin;
+                lives--;
+                livesLeft.setText("Lives: " + lives);
+                if (lives == 0) {
+                    canvas.removeAll();
+                    PenguinDude lossPenguin = new PenguinDude();
+                    lossPenguin.setLossPenguin();
+                    canvas.add(lossPenguin);
+                    maze.isPaused = true;
+                }
             }
             if (maze.isCompleted) {
                 if (iter.hasNext()) {
-                    System.out.println("Yay! You did it!!!");
                     canvas.removeAll();
                     maze = new Maze(canvas, iter.next());
                     penguin = maze.getPenguin();

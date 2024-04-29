@@ -22,10 +22,12 @@ public class Maze {
     private Block endBlock;
     private Block startBlock;
     private Color walkingGroundColor = new Color(173, 216, 230);
+    public boolean isPaused;
     public boolean isCompleted;
     
     public Maze(CanvasWindow canvas, String mazeFile){
         isCompleted = false;
+        isPaused = false;
         this.canvas = canvas;
         penguin = new PenguinDude();
         loadMaze(mazeFile);
@@ -85,7 +87,7 @@ public class Maze {
             Block moveBlock = new Block(BLOCK_SIDELENGTH, BLOCK_SIDELENGTH);
             moveBlock.setFillColor(Color.GRAY);
             moveTheBlock(moveBlock);
-            canvas.add(moveBlock, 180, 60);
+            canvas.add(moveBlock, 180, 120);
         }
         scanner.close();
     }
@@ -154,12 +156,14 @@ public class Maze {
     double time = 0;
     public void changingColorBlock(Block block){
         canvas.animate(dt -> {
-            time += dt;
-            if ((int) time % 7 == 0) {
-                block.setFillColor(Color.BLACK);
-            }
-            else {
-                block.setFillColor(walkingGroundColor);
+            if (!isPaused) {
+                time += dt;
+                if ((int) time % 7 == 0) {
+                    block.setFillColor(Color.BLACK);
+                }
+                else {
+                    block.setFillColor(walkingGroundColor);
+                }
             }
         });
     }
@@ -170,7 +174,9 @@ public class Maze {
      */
     public void moveTheBlock(Block block) {
         canvas.animate((dt) -> {
-            block.move(canvas, this);
+            if (!isPaused) {
+                block.move(canvas, this);
+            }
         });
     }
 }

@@ -7,9 +7,15 @@ public class PenguinDude extends GraphicsGroup{
     private Image penguin;
 
     public PenguinDude() {
-        penguin =  new Image("penguinDude.png");
+        penguin = new Image("penguinDude.png");
         penguin.setMaxHeight(30);
         penguin.setMaxWidth(30);
         this.add(penguin);
+    }
+
+    public void setLossPenguin() {
+        penguin.setImagePath("Penguin_loss.jpg");
+        penguin.setMaxWidth(600);
+        penguin.setMaxHeight(650);
     }
 }

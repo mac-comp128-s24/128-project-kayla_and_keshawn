@@ -5,7 +5,6 @@ import edu.macalester.graphics.events.Key;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.Queue;
 
 public class PenguinMaze {
     
@@ -14,12 +13,11 @@ public class PenguinMaze {
     private PenguinDude penguin;
     private List<String> levelFiles;
     private Iterator<String> iter;
-    private Queue<Block> mazeQueue;
     private int lives;
 
     public PenguinMaze(CanvasWindow canvas) {
         this.canvas = canvas;
-        levelFiles = List.of("MazePattern1.txt", "MazePattern2.txt", "MovingWalls.txt", "level4.txt", "level5.txt", "level6.txt");
+        levelFiles = List.of("MazePattern1.txt", "MazePattern2.txt", "MovingWalls.txt", "Level4.txt", "Level5.txt", "Level6.txt");
         iter = levelFiles.iterator();
         maze = new Maze(canvas, iter.next());
         penguin = maze.getPenguin();
@@ -62,6 +60,14 @@ public class PenguinMaze {
                 PenguinDude revivedPenguin = new PenguinDude();
                 maze.setPenguin(revivedPenguin);
                 penguin = revivedPenguin;
+                lives--;
+                if (lives == 0) {
+                    canvas.removeAll();
+                    PenguinDude lossPenguin = new PenguinDude();
+                    lossPenguin.setLossPenguin();
+                    canvas.add(lossPenguin);
+                    maze.isPaused = true;
+                }
             }
             if (maze.isCompleted) {
                 if (iter.hasNext()) {

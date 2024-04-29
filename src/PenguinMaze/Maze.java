@@ -71,6 +71,7 @@ public class Maze {
                 }
                 else if (next == 3) { // Indicates the end block
                     endBlock = newBlock;
+                    endBlock.setFillColor(walkingGroundColor);
                 }
                 else if (next == 4) { // Indicates the block that transports penguin exactly 115 units to the left
                     newBlock.setFillColor(Color.RED);

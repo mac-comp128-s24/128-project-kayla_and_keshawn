@@ -9,8 +9,8 @@ public class IglooHome extends GraphicsGroup{
     
     public IglooHome() {
         igloo = new Image("penguinHome.png");
-        igloo.setMaxHeight(30);
-        igloo.setMaxWidth(30);
+        igloo.setMaxHeight(45);
+        igloo.setMaxWidth(45);
         this.add(igloo);
     }
 }

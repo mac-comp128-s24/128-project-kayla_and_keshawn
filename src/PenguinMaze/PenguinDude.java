@@ -18,4 +18,10 @@ public class PenguinDude extends GraphicsGroup{
         penguin.setMaxWidth(600);
         penguin.setMaxHeight(650);
     }
+
+    public void setWinPenguin() {
+        penguin.setImagePath("endScreen-4.jpg");
+        penguin.setMaxWidth(600);
+        penguin.setMaxHeight(650);
+    }
 }

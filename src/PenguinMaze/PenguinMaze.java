@@ -85,9 +85,14 @@ public class PenguinMaze {
                     canvas.removeAll();
                     maze = new Maze(canvas, iter.next());
                     penguin = maze.getPenguin();
+                    livesLeft.setText("Lives: " + lives);
+                    canvas.add(livesLeft, 0, 20);
                 }
                 else {
-                    
+                    canvas.removeAll();
+                    PenguinDude winPenguin = new PenguinDude();
+                    winPenguin.setWinPenguin();
+                    canvas.add(winPenguin);
                 }
             }
         });

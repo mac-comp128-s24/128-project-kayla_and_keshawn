@@ -5,10 +5,8 @@ import java.io.InputStream;
 
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.GraphicsObject;
-import edu.macalester.graphics.GraphicsText;
 import edu.macalester.graphics.Point;
 
-import java.util.Queue;
 import java.util.Scanner;
 
 

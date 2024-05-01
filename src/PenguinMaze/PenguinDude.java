@@ -3,6 +3,10 @@ package PenguinMaze;
 import edu.macalester.graphics.GraphicsGroup;
 import edu.macalester.graphics.Image;
 
+/**
+ * This class takes multiple images as a GraphicsGroup so 
+ * that we can use them throughout the game.
+*/
 public class PenguinDude extends GraphicsGroup{
     private Image penguin;
 

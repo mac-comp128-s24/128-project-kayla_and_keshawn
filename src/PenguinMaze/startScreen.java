@@ -11,6 +11,10 @@ import edu.macalester.graphics.Rectangle;
 import edu.macalester.graphics.TextAlignment;
 import edu.macalester.graphics.ui.Button;
 
+/**
+ * This class is our main UI that includes the main method to run the 
+ * whole game. 
+*/
 public class StartScreen {
     private CanvasWindow canvas;
     private final Color CANVAS_COLOR = new Color(255, 255, 230);
@@ -21,7 +25,11 @@ public class StartScreen {
         canvas.setBackground(CANVAS_COLOR);
         instructions = new GraphicsText();
     }
-
+    /**
+    * This method sets up the UI by getting the image of the start page 
+    * and it creates the buttons to begin the page. It also contains the 
+    * instructions for the game. 
+    */
     public void setupUI(){
         GraphicsGroup uiGroup = new GraphicsGroup();
         Image startPage = new Image("StartPage.png");

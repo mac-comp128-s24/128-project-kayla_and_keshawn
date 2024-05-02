@@ -12,7 +12,7 @@ Upon running the code, you will see the start screen with some instructions on h
 
 The penguin also has a set amount of lives. If you run out of lives by running into thr walls or blinking blocks, you will be jumpscared by the forbidden penguin. 
 
-Once you reach the end of all the levels, you have completed the game. Congrats!
+Once you reach the end of all 6 the levels, you have completed the game. Congrats!
 
 Made by Kayla and Keshawn 
 
